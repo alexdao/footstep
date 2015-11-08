@@ -7,6 +7,4 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.calliemao.gasmeter.ui.WeeklyTimeline"
     tools:showIn="@layout/activity_weekly_timeline">
-
-
 </android.support.v4.widget.NestedScrollView>
