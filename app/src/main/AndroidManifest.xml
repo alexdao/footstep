@@ -28,6 +28,9 @@
             android:label="@string/title_activity_paths_map"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCjnY7m8hXu7jZv3eQw6EdZxm3Sd7uvOnY"/>
     </application>
 
 </manifest>
