@@ -453,7 +453,21 @@ public class MainActivity extends AppCompatActivity implements
         String[] photo_array = getResources().getStringArray(R.array.photo_ID);
 
         for (int i = 0; i < stats_array.length; i++) {
-            stats.add(new StatItem(photo_array[i], stats_array[i], 5));
+            if(i==0){
+                stats.add(new StatItem(photo_array[i], stats_array[i], 32));
+            }
+            if(i==1){
+                stats.add(new StatItem(photo_array[i], stats_array[i], 22));
+            }
+            if(i==2){
+                stats.add(new StatItem(photo_array[i], stats_array[i], 10.1));
+            }
+            if(i==3){
+                stats.add(new StatItem(photo_array[i], stats_array[i], 6.3));
+            }
+            else{
+
+            }
         }
     }
 
