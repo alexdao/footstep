@@ -454,16 +454,16 @@ public class MainActivity extends AppCompatActivity implements
 
         for (int i = 0; i < stats_array.length; i++) {
             if(i==0){
-                stats.add(new StatItem(photo_array[i], stats_array[i], 32));
+                stats.add(new StatItem(photo_array[i], stats_array[i], 72));
             }
             if(i==1){
-                stats.add(new StatItem(photo_array[i], stats_array[i], 22));
+                stats.add(new StatItem(photo_array[i], stats_array[i], 8.1));
             }
             if(i==2){
                 stats.add(new StatItem(photo_array[i], stats_array[i], 10.1));
             }
             if(i==3){
-                stats.add(new StatItem(photo_array[i], stats_array[i], 6.3));
+                stats.add(new StatItem(photo_array[i], stats_array[i], 4));
             }
             else{
 

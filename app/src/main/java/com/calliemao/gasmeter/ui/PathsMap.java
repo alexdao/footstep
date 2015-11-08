@@ -49,17 +49,17 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
         map.addMarker(new MarkerOptions()
                 .position(new LatLng(37.316529, -122.02534))
                 .title("Marker"));
-        map.addMarker(new MarkerOptions().position(new LatLng(37.3627921,-122.1036683)));
+        map.addMarker(new MarkerOptions().position(new LatLng(37.421987, -122.084086)));
         client.makeRoute("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "driving");
         client.makeRoute("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "walking");
         double[] metrics = client.findDuration("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "driving", System.currentTimeMillis() / 1000L);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.34, -122.02), 10));
-        map.animateCamera(CameraUpdateFactory.zoomTo(12), 2000, null);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.37, -122.05), 9));
+        map.animateCamera(CameraUpdateFactory.zoomTo(11), 2000, null);
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             public void onMapClick(LatLng lat) {
                 //TODO: One of the routes could get starved
                 for (Polyline p : lineList) {
-                    if (PolyUtil.isLocationOnPath(lat, p.getPoints(), true, 25)) {
+                    if (PolyUtil.isLocationOnPath(lat, p.getPoints(), true, 40)) {
                         Log.e("Selected!", "Selected!");
                         selectedLine = p;
                         break;
