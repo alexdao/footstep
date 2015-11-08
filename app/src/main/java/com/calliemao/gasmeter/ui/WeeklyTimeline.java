@@ -35,10 +35,11 @@ public class WeeklyTimeline extends AppCompatActivity {
         /*Bar bar1 = new Bar("Friday", 5);
         Bar bar2 = new Bar("Saturday", 5);
         Bar bar3 = new Bar("Sunday", 5);*/
-        String[] testLabels = {"Friday", "Saturday", "Sunday"};
-        float[] testData = {5, 10, 12};
+        String[] testLabels = {"Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"};
+        float[] testData = {20, 14, 17, 18, 22, 8, 6};
         BarSet test = new BarSet(testLabels, testData);
 
         barChartView.addData(test);
+        barChartView.show();
     }
 }
