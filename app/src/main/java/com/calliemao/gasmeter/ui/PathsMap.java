@@ -26,5 +26,7 @@ public class PathsMap extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
     }
 }

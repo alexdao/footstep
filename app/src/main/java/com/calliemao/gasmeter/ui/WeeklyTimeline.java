@@ -8,6 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.calliemao.gasmeter.R;
+import com.db.chart.model.Bar;
+import com.db.chart.model.BarSet;
+import com.db.chart.view.BarChartView;
 
 public class WeeklyTimeline extends AppCompatActivity {
 
@@ -26,5 +29,16 @@ public class WeeklyTimeline extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        BarChartView barChartView = (BarChartView) findViewById(R.id.linechart);
+
+        /*Bar bar1 = new Bar("Friday", 5);
+        Bar bar2 = new Bar("Saturday", 5);
+        Bar bar3 = new Bar("Sunday", 5);*/
+        String[] testLabels = {"Friday", "Saturday", "Sunday"};
+        float[] testData = {5, 10, 12};
+        BarSet test = new BarSet(testLabels, testData);
+
+        barChartView.addData(test);
     }
 }

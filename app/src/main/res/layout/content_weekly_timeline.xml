@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_weekly_timeline" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.calliemao.gasmeter.ui.WeeklyTimeline">
+    tools:context="com.calliemao.gasmeter.ui.WeeklyTimeline"
+    tools:showIn="@layout/activity_weekly_timeline">
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin" android:text="@string/large_text" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="20dip">
 
+        <com.db.chart.view.BarChartView xmlns:chart="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/linechart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_weight=".4"
+            android:background="#00BBA7"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            chart:chart_axisBorderSpacing="0dp"
+            chart:chart_axisColor="@android:color/white"
+            chart:chart_labelColor="@android:color/white">
+        </com.db.chart.view.BarChartView>
+
+    </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
