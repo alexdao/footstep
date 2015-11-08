@@ -28,7 +28,6 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="10dp"
-            chart:chart_shadowColor="#FFFFFF"
             chart:chart_axisBorderSpacing="0dp"
             chart:chart_axisColor="@android:color/white"
             chart:chart_labelColor="@android:color/white">
