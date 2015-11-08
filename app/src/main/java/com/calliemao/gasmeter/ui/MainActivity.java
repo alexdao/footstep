@@ -73,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
 
+    @Bind(R.id.miles_driven)
+    TextView textView;
+
     LinearLayoutManager llm;
     RVAdapter adapter;
 
@@ -128,6 +131,13 @@ public class MainActivity extends AppCompatActivity implements
         mAdapter = new DetectedActivitiesAdapter(this, mDetectedActivities);
         mDetectedActivitiesListView.setAdapter(mAdapter);
 
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, WeeklyTimeline.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
         buildGoogleApiClient();
     }
 
