@@ -92,4 +92,13 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_paths_map">PathsMap</string>
+
+
+    <!-- Main Activity -->
+    <string-array name="stats_array">
+        <item>miles driven</item>
+        <item>gallons of gas</item>
+        <item>gas saved</item>
+        <item>miles walked/biked</item>
+    </string-array>
 </resources>
