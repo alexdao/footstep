@@ -46,7 +46,9 @@
             android:paddingTop="@dimen/activity_vertical_margin"
             android:text="76 miles"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/miles_driven" />
+            android:textSize="@dimen/miles_driven"
+            android:onClick="onClick"
+            android:clickable="true"/>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/linearlayout"
