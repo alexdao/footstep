@@ -46,9 +46,15 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
         this.map = map;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         MapsResponse client = MapsResponse.getInstance();
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(37.316529, -122.02534))
+                .title("Marker"));
+        map.addMarker(new MarkerOptions().position(new LatLng(37.3627921,-122.1036683)))
         client.makeRoute("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "driving");
         client.makeRoute("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "walking");
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.5, -122.02), 10));
+        double[] metrics = client.findDuration("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "driving", System.currentTimeMillis() / 1000L);
+        selectedLine = lineList.get(0);//default to having one selected
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.34, -122.02), 10));
         map.animateCamera(CameraUpdateFactory.zoomTo(12), 2000, null);
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             public void onMapClick(LatLng lat) {
@@ -68,9 +74,6 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
 
     @Subscribe
     public void handleGodLineEvent(GoogleGodLineEvent event) {
-        map.addMarker(new MarkerOptions()
-                .position(new LatLng(0, 0))
-                .title("Marker"));
         PolylineOptions godLine = event.getGodLine();
         Polyline line = map.addPolyline(godLine.color(Color.YELLOW));
         lineList.add(line);
@@ -97,6 +100,21 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
         }
     }
 
+    private long findOptimalTime(){
+        long unixTime = System.currentTimeMillis() / 1000L;
+        double minEmission = Integer.MAX_VALUE;
+        long minTime = unixTime;
+        for (int i = 0; i < 8; i++){
+            double currentEmission = MapsResponse.getInstance().findDuration("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "driving",
+                    i * 900 + unixTime)[1];
+            if (currentEmission < minEmission){
+                minTime = unixTime + i*900;
+                minEmission = currentEmission;
+            }
+        }
+        return minTime;
+    }
+
     private void select(){
         selectedLine.setColor(Color.BLUE);
     }
@@ -105,7 +123,7 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
         for (Polyline l: lineList){
             if (l!=selectedLine){
                 l.setColor(Color.GRAY);
-                l.setWidth(4);
+                l.setWidth(3);
             }
         }
     }
