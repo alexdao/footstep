@@ -47,14 +47,7 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_paths_map);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
                     mapFragment.getMapAsync(this);
@@ -62,20 +55,17 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
 
     public void onMapReady(GoogleMap map){
         this.map = map;
-        map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        //MapsResponse client = MapsResponse.getInstance();
-        //client.makeRoute();
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        MapsResponse client = MapsResponse.getInstance();
+        client.makeRoute();
     }
 
     @Subscribe
     public void handleGodLineEvent(GoogleGodLineEvent event) {
-        Log.e("Event received", "Hello");
         map.addMarker(new MarkerOptions()
                 .position(new LatLng(0, 0))
                 .title("Marker"));
-        Log.e("After first marker", "?");
         map.addPolyline(event.getGodLine());
-        Log.e("After 2nd marker", "yay");
     }
 
     @Override
