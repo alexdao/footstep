@@ -26,7 +26,6 @@
         android:paddingTop="@dimen/rv_padding"
         android:paddingLeft="@dimen/timeline_dist_padding"/>
 
-
     <ImageView
         android:src="@drawable/arrow"
         android:paddingTop="@dimen/timeline_arrow_padding"

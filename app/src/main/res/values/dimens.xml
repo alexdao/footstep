@@ -18,4 +18,13 @@
     <dimen name="timeline_arrow_height">40dp</dimen>
     <!-- Font sizes -->
     <dimen name="miles_driven">42sp</dimen>
+
+    <!-- Services -->
+    <dimen name="wide_space">24dp</dimen>
+    <dimen name="narrow_space">8dp</dimen>
+    <dimen name="headline_text_size">24sp</dimen>
+
+    <dimen name="progress_bar_min_height">6dp</dimen>
+    <dimen name="progress_bar_top_margin">4dp</dimen>
+>>>>>>> 440fe50a193289284432c418bc0d94ca477cf878
 </resources>
