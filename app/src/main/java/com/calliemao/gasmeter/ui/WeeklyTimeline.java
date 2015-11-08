@@ -33,9 +33,6 @@ public class WeeklyTimeline extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
-    @Bind(R.id.fab)
-    FloatingActionButton fab;
-
     @Bind(R.id.linechart)
     BarChartView barChartView;
 
@@ -56,15 +53,6 @@ public class WeeklyTimeline extends AppCompatActivity {
 
         initializeData();
         initializeRecyclerView(findViewById(R.id.recycler_view));
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
 
        // String[] testLabels = {"Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"};
       //  float[] testData = {19, 14, 17, 18, 19, 8, 6};
