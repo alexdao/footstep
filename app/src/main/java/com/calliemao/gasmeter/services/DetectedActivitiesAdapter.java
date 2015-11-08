@@ -80,9 +80,7 @@ public class DetectedActivitiesAdapter extends ArrayAdapter<DetectedActivity> {
         // changed and views reflecting the data should refresh.
         for (DetectedActivity detectedActivity : tempList) {
             this.add(detectedActivity);
-
             Log.e(Constants.getActivityString(getContext(), detectedActivity.getType()), Double.toString(detectedActivity.getConfidence()));
-
         }
     }
 }

@@ -58,9 +58,6 @@ public class MainActivity extends AppCompatActivity implements
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
-    @Bind(R.id.fab)
-    FloatingActionButton fab;
-
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
 
@@ -115,14 +112,6 @@ public class MainActivity extends AppCompatActivity implements
         mDetectedActivitiesListView.setAdapter(mAdapter);
 
         buildGoogleApiClient();
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -328,7 +317,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void updateDetectedActivitiesList(ArrayList<DetectedActivity> detectedActivities) {
         mAdapter.updateActivities(detectedActivities);
     }
-    
+
     /**
      * Receiver for intents sent by DetectedActivitiesIntentService via a sendBroadcast().
      * Receives a list of one or more DetectedActivity objects associated with the current state of
@@ -342,19 +331,6 @@ public class MainActivity extends AppCompatActivity implements
             ArrayList<DetectedActivity> updatedActivities =
                     intent.getParcelableArrayListExtra(Constants.ACTIVITY_EXTRA);
             updateDetectedActivitiesList(updatedActivities);
-/**
-            HashMap<Integer, Integer> detectedActivitiesMap = new HashMap<>();
-            for (DetectedActivity activity : updatedActivities) {
-                detectedActivitiesMap.put(activity.getType(), activity.getConfidence());
-            }
-            ArrayList<DetectedActivity> tempList = new ArrayList<DetectedActivity>();
-            for (int i = 0; i < Constants.MONITORED_ACTIVITIES.length; i++) {
-                int confidence = detectedActivitiesMap.containsKey(Constants.MONITORED_ACTIVITIES[i]) ?
-                        detectedActivitiesMap.get(Constants.MONITORED_ACTIVITIES[i]) : 0;
-
-                tempList.add(new DetectedActivity(Constants.MONITORED_ACTIVITIES[i],
-                        confidence));
-            }*/
         }
     }
 
