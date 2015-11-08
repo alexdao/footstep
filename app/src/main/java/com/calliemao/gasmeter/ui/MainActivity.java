@@ -1,5 +1,6 @@
 package com.calliemao.gasmeter.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.calliemao.gasmeter.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<String> stats;
+    List<StatItem> stats;
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeData(){
         stats = new ArrayList<>();
+
     }
 
     private void initializeRecyclerView(View view) {
@@ -107,17 +110,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static class RVAdapter extends RecyclerView.Adapter<RVAdapter.MainStatViewHolder> {
 
-        List<String> stats;
+        List<StatItem> stats;
         View view;
 
-        RVAdapter(List<String> stats, View view) {
+        RVAdapter(List<StatItem> stats, View view) {
             this.stats = stats;
             this.view = view;
-        }
-
-        public void clear() {
-            stats.clear();
-            notifyDataSetChanged();
         }
 
         @Override
@@ -137,8 +135,14 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(MainStatViewHolder mainStatViewHolder, int i) {
-            mainStatViewHolder.rightTitle.setText(stats.get(i));
-            mainStatViewHolder.mainDescription.setText(stats.get(i));
+            mainStatViewHolder.rightTitle.setText(Double.toString(stats.get(i).amount));
+            mainStatViewHolder.mainDescription.setText(stats.get(i).description);
+
+            Context context = mainStatViewHolder.statImage.getContext();
+            Picasso.with(context)
+                    .load(stats.get(i).getPhotoID())
+                    .fit().centerCrop()
+                    .into(mainStatViewHolder.statImage);
         }
 
         @Override
