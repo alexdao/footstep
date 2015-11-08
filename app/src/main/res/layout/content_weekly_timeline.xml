@@ -7,9 +7,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.calliemao.gasmeter.ui.WeeklyTimeline"
     tools:showIn="@layout/activity_weekly_timeline">
-    <!--TODO: Remove nestedScrollView-->
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -35,24 +34,11 @@
             chart:chart_labelColor="@android:color/white">
         </com.db.chart.view.BarChartView>
 
-        <ListView
-            android:id="@id/android:list"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:fastScrollEnabled="true"
-            android:scrollbarStyle="insideInset"
-            android:textFilterEnabled="false"
-            android:divider="@null"
-            android:layout_margin="0dp"
-            android:paddingTop="0dp"
-            android:paddingBottom="0dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="22dp"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="@string/title_activity_weekly_timeline" />
-    </LinearLayout>
+            android:text="@string/title_activity_weekly_timeline"
+            android:layout_below="@id/linechart"/>
+    </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>
