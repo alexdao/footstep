@@ -47,14 +47,14 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         MapsResponse client = MapsResponse.getInstance();
         client.makeRoute("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "driving");
-        client.makeRoute("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "transit");
+        client.makeRoute("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "walking");
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.5, -122.02), 10));
         map.animateCamera(CameraUpdateFactory.zoomTo(12), 2000, null);
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             public void onMapClick(LatLng lat) {
                 //TODO: One of the routes could get starved
                 for (Polyline p : lineList) {
-                    if (PolyUtil.isLocationOnPath(lat, p.getPoints(), true, 10)) {
+                    if (PolyUtil.isLocationOnPath(lat, p.getPoints(), true, 25)) {
                         Log.e("Selected!", "Selected!");
                         selectedLine = p;
                         break;
@@ -72,7 +72,7 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
                 .position(new LatLng(0, 0))
                 .title("Marker"));
         PolylineOptions godLine = event.getGodLine();
-        Polyline line = map.addPolyline(godLine.color(Color.BLUE));
+        Polyline line = map.addPolyline(godLine.color(Color.YELLOW));
         lineList.add(line);
         optionsList.add(godLine);
     }
@@ -98,13 +98,13 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     private void select(){
-        selectedLine.setColor(Color.RED);
+        selectedLine.setColor(Color.BLUE);
     }
 
     private void unselect(){
         for (Polyline l: lineList){
             if (l!=selectedLine){
-                l.setColor(Color.GREEN);
+                l.setColor(Color.GRAY);
                 l.setWidth(4);
             }
         }
