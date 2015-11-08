@@ -105,7 +105,7 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
         for (Polyline l: lineList){
             if (l!=selectedLine){
                 l.setColor(Color.GRAY);
-                l.setWidth(4);
+                l.setWidth(10);
             }
         }
     }
