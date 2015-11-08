@@ -85,7 +85,6 @@ public class WeeklyTimeline extends AppCompatActivity {
         Animation animation = new Animation(1500);
         animation.setEasing(new ElasticEase());
 
-
 //        barChartView.setAxisBorderValues(0, 100, 5);
         barChartView.show(animation);
 

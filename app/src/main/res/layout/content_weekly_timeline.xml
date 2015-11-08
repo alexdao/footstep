@@ -34,7 +34,6 @@
         </com.db.chart.view.BarChartView>
 
         <android.support.v7.widget.RecyclerView
-            android:layout_below="@id/linechart"
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

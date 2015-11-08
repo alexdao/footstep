@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         initializeData();
         initializeRecyclerView(findViewById(R.id.recycler_view));
 
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
