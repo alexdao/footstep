@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
@@ -44,6 +45,7 @@ import com.google.android.gms.location.DetectedActivity;
 import com.google.android.gms.location.LocationServices;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -133,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
                 .addApi(ActivityRecognition.API)
                 .build();
     }
@@ -356,16 +359,21 @@ public class MainActivity extends AppCompatActivity implements
             }
 
             if (curAction == 5){
+                Log.e("onReceive", "driving!!!!!");
                 // record time
                 Calendar cal = new GregorianCalendar(TimeZone.getTimeZone("EST"));
                 Date date = cal.getTime();
+//                Log.e("date", Integer.toString(date.getTime()));
+                Log.e("date2", date.toString());
 
                 // record location
                 Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                Log.e("loc", location.toString());
 
                 // write to JSON
                 try {
-                    writeToJSON(new FileOutputStream("test_driving.json"), date, location);
+
+                    writeToJSON(new FileOutputStream(new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/test_driving.json")), date, location);
                 }
                 catch(IOException e){
                     Log.e("exception", e.toString());
@@ -375,6 +383,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void writeToJSON(OutputStream out, Date date, Location loc) throws IOException {
+        FileOutputStream outputStream;
         JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
         writer.setIndent("  ");
         writer.beginArray();
