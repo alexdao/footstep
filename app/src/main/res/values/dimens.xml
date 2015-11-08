@@ -8,11 +8,14 @@
 
     <!-- Main page dimensions -->
     <dimen name="rv_padding">20dp</dimen>
+    <!--<dimen name="rv2_padding">40dp</dimen>-->
     <dimen name="stat_pic_diameter">80dp</dimen>
     <dimen name="stat_pic_padding">6dp</dimen>
     <dimen name="timeline_date_padding">15dp</dimen>
     <dimen name="timeline_dist_padding">125dp</dimen>
-
+    <dimen name="timeline_arrow_padding">30dp</dimen>
+    <dimen name="timeline_arrow_width">40dp</dimen>
+    <dimen name="timeline_arrow_height">40dp</dimen>
     <!-- Font sizes -->
-    <dimen name="miles_driven">52sp</dimen>
+    <dimen name="miles_driven">42sp</dimen>
 </resources>

@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:paddingLeft="@dimen/timeline_date_padding"
-        android:paddingTop="@dimen/rv_padding"
+        android:layout_marginTop="@dimen/rv_padding"
         android:textColor="#00BBA7"
         android:textStyle="bold"
         android:textSize="20sp"/>
@@ -25,5 +25,14 @@
         android:layout_alignParentBottom="true"
         android:paddingTop="@dimen/rv_padding"
         android:paddingLeft="@dimen/timeline_dist_padding"/>
+
+
+    <ImageView
+        android:src="@drawable/arrow"
+        android:paddingTop="@dimen/timeline_arrow_padding"
+        android:layout_width="@dimen/timeline_arrow_width"
+        android:layout_height="@dimen/timeline_arrow_height"
+        android:layout_alignParentEnd="true"
+        android:alpha="0.8"/>
 
 </RelativeLayout>
