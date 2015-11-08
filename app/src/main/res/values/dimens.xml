@@ -5,4 +5,12 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+
+    <!-- Main page dimensions -->
+    <dimen name="rv_padding">20dp</dimen>
+    <dimen name="stat_pic_diameter">80dp</dimen>
+    <dimen name="stat_pic_padding">6dp</dimen>
+
+    <!-- Font sizes -->
+    <dimen name="miles_driven">36sp</dimen>
 </resources>
