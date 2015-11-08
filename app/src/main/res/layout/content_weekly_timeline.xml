@@ -8,36 +8,5 @@
     tools:context="com.calliemao.gasmeter.ui.WeeklyTimeline"
     tools:showIn="@layout/activity_weekly_timeline">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="0dp">
 
-        <com.db.chart.view.BarChartView xmlns:chart="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/linechart"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_weight=".6"
-            android:background="#777777"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            chart:chart_axisBorderSpacing="0dp"
-            chart:chart_axisColor="@android:color/white"
-            chart:chart_labelColor="@android:color/white">
-        </com.db.chart.view.BarChartView>
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_below="@id/linechart"
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-    </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

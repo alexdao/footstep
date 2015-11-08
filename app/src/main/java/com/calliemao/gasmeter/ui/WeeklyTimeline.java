@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,7 +100,6 @@ public class WeeklyTimeline extends AppCompatActivity {
         items.add(new TimelineItem("callie", "alex"));
         items.add(new TimelineItem("callie", "alex"));
 
-
     }
 
     private void initializeRecyclerView(View view) {
@@ -130,6 +130,7 @@ public class WeeklyTimeline extends AppCompatActivity {
 
         @Override
         public TimelineViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
+            Log.d("entered here", "sdfsdjf");
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_timeline, viewGroup, false);
             TimelineViewHolder pvh = new TimelineViewHolder(v, new TimelineViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
@@ -140,6 +141,7 @@ public class WeeklyTimeline extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(TimelineViewHolder timelineViewHolder, int i) {
+            Log.d("entered here", "callie");
             timelineViewHolder.date.setText(items.get(i).date);
             timelineViewHolder.distance.setText(items.get(i).distance);
         }
@@ -158,6 +160,7 @@ public class WeeklyTimeline extends AppCompatActivity {
 
             TimelineViewHolder(View itemView, ISunlightDataViewHolderClicks listener) {
                 super(itemView);
+                Log.d("entered here", "1");
                 mListener = listener;
                 relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout);
                 relativeLayout.setOnClickListener(this);

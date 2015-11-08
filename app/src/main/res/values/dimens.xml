@@ -12,5 +12,5 @@
     <dimen name="stat_pic_padding">6dp</dimen>
 
     <!-- Font sizes -->
-    <dimen name="miles_driven">36sp</dimen>
+    <dimen name="miles_driven">52sp</dimen>
 </resources>

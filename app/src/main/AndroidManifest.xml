@@ -31,12 +31,6 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 
-        <!-- Service that provides activity recognition data. Setting the android:exported attribute
-        to "false" stops other apps from starting this service, even when using an explicit
-        intent. -->
-        <service
-            android:name=".DetectedActivitiesIntentService"
-            android:exported="false" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCjnY7m8hXu7jZv3eQw6EdZxm3Sd7uvOnY"/>

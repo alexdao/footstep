@@ -19,15 +19,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/stat_photo"
-        android:layout_alignParentTop="true"
+        android:text="@dimen/miles_driven"
         android:paddingTop="@dimen/rv_padding" />
 
     <TextView
         android:id="@+id/mainDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:text="@dimen/miles_driven"
         android:paddingEnd="@dimen/rv_padding" />
 
 </RelativeLayout>

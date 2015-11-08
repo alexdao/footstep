@@ -140,8 +140,21 @@ public class MainActivity extends AppCompatActivity {
             mainStatViewHolder.mainDescription.setText(stats.get(i).description);
 
             Context context = mainStatViewHolder.statImage.getContext();
+            int picID;
+            if(i==0){
+                picID = R.drawable.ic_directions_car_black_48dp;
+            }
+            else if(i==1){
+                picID = R.drawable.ic_local_gas_station_black_48dp;
+            }
+            else if(i==2){
+                picID = R.drawable.ic_favorite_border_black_48dp;
+            }
+            else{
+                picID = R.drawable.ic_directions_run_black_48dp;
+            }
             Picasso.with(context)
-                    .load(stats.get(i).getPhotoID())
+                    .load(picID)
                     .fit().centerCrop()
                     .into(mainStatViewHolder.statImage);
         }
