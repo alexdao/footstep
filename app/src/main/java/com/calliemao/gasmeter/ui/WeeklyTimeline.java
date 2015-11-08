@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,6 @@ import com.db.chart.model.Bar;
 import com.db.chart.model.BarSet;
 import com.db.chart.view.BarChartView;
 import com.db.chart.view.animation.Animation;
-import com.db.chart.view.animation.easing.LinearEase;
 import com.db.chart.view.animation.easing.ElasticEase;
 
 import java.util.ArrayList;
@@ -66,14 +66,14 @@ public class WeeklyTimeline extends AppCompatActivity {
         });
 
 
-        String[] testLabels = {"Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"};
-        float[] testData = {19, 14, 17, 18, 19, 8, 6};
+       // String[] testLabels = {"Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"};
+      //  float[] testData = {19, 14, 17, 18, 19, 8, 6};
         BarSet test = new BarSet();
         test.setColor(-10);
         barChartView.addData(test);
 
-        for (int i = 0; i < testLabels.length; i++){
-            Bar bar = new Bar(testLabels[i], testData[i]);
+        for (int i = 0; i < items.size(); i++){
+            Bar bar = new Bar(items.get(i).getDayOfWeek(), items.get(i).getDistance());
 
             if (i % 2 == 0)
                 bar.setColor(Color.parseColor("#DDDDDD"));
@@ -92,13 +92,13 @@ public class WeeklyTimeline extends AppCompatActivity {
 
     private void initializeData(){
         items = new ArrayList<>();
-        items.add(new TimelineItem("callie", "alex"));
-        items.add(new TimelineItem("callie", "alex"));
-        items.add(new TimelineItem("callie", "alex"));
-        items.add(new TimelineItem("callie", "alex"));
-        items.add(new TimelineItem("callie", "alex"));
-
-
+        items.add(new TimelineItem("Mon", "11/2", 19, "miles"));
+        items.add(new TimelineItem("Tues", "11/3", 14, "miles"));
+        items.add(new TimelineItem("Wed", "11/4", 17, "miles"));
+        items.add(new TimelineItem("Thurs", "11/5", 18, "miles"));
+        items.add(new TimelineItem("Fri", "11/6", 19, "miles"));
+        items.add(new TimelineItem("Sat", "11/7", 8, "miles"));
+        items.add(new TimelineItem("Sun", "11/8", 6, "miles"));
     }
 
     private void initializeRecyclerView(View view) {
@@ -129,6 +129,7 @@ public class WeeklyTimeline extends AppCompatActivity {
 
         @Override
         public TimelineViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
+            Log.d("entered here", "sdfsdjf");
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_timeline, viewGroup, false);
             TimelineViewHolder pvh = new TimelineViewHolder(v, new TimelineViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
@@ -139,8 +140,9 @@ public class WeeklyTimeline extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(TimelineViewHolder timelineViewHolder, int i) {
-            timelineViewHolder.date.setText(items.get(i).date);
-            timelineViewHolder.distance.setText(items.get(i).distance);
+            Log.d("entered here - date", items.get(i).getDate());
+            timelineViewHolder.date.setText(items.get(i).getDayOfWeek() + " " + items.get(i).getDate());
+            timelineViewHolder.distance.setText(Integer.toString(items.get(i).getDistance()) + " " + items.get(i).getUnits());
         }
 
         @Override
@@ -157,6 +159,7 @@ public class WeeklyTimeline extends AppCompatActivity {
 
             TimelineViewHolder(View itemView, ISunlightDataViewHolderClicks listener) {
                 super(itemView);
+                Log.d("entered here", "1");
                 mListener = listener;
                 relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout);
                 relativeLayout.setOnClickListener(this);

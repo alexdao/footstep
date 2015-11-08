@@ -103,9 +103,9 @@
     </string-array>
 
     <string-array name="photo_ID">
-        <item>R.id.ic_directions_car_black_48dp</item>
-        <item>R.id.ic_local_gas_station_black_48dp</item>
-        <item>R.id.favorite_border_black_48dp</item>
-        <item>R.id.ic_directions_run_black_48dp</item>
+        <item>R.drawable.ic_directions_car_black_48dp</item>
+        <item>R.drawable.ic_local_gas_station_black_48dp</item>
+        <item>R.drawable.ic_favorite_border_black_48dp</item>
+        <item>R.drawable.ic_directions_run_black_48dp</item>
     </string-array>
 </resources>

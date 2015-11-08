@@ -10,7 +10,9 @@
     <dimen name="rv_padding">20dp</dimen>
     <dimen name="stat_pic_diameter">80dp</dimen>
     <dimen name="stat_pic_padding">6dp</dimen>
+    <dimen name="timeline_date_padding">15dp</dimen>
+    <dimen name="timeline_dist_padding">125dp</dimen>
 
     <!-- Font sizes -->
-    <dimen name="miles_driven">36sp</dimen>
+    <dimen name="miles_driven">52sp</dimen>
 </resources>
