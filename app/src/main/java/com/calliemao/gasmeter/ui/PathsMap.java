@@ -1,5 +1,6 @@
 package com.calliemao.gasmeter.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import com.calliemao.gasmeter.bus2.BusProvider;
 import com.calliemao.gasmeter.bus2.GoogleGodLineEvent;
 import com.calliemao.gasmeter.clients.MapsResponse;
 import com.calliemao.gasmeter.ui.PolyUtil.PolyUtil;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -27,7 +29,7 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
     GoogleMap map;
     private List<Polyline> lineList= new ArrayList<>();
     private List<PolylineOptions> optionsList = new ArrayList<>();
-    private PolylineOptions selectedLine = null;
+    private Polyline selectedLine = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,19 +48,22 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
         MapsResponse client = MapsResponse.getInstance();
         client.makeRoute("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "driving");
         client.makeRoute("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "transit");
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.5, -122.02), 10));
+        map.animateCamera(CameraUpdateFactory.zoomTo(12), 2000, null);
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             public void onMapClick(LatLng lat) {
                 //TODO: One of the routes could get starved
-                for (PolylineOptions p : optionsList) {
-                    if (PolyUtil.isLocationOnPath(lat, p.getPoints(), true, 100)) {
+                for (Polyline p : lineList) {
+                    if (PolyUtil.isLocationOnPath(lat, p.getPoints(), true, 10)) {
                         Log.e("Selected!", "Selected!");
                         selectedLine = p;
+                        break;
                     }
                 }
                 updateLineSelection();
             }
         });
-        map.setTrafficEnabled(true);
+        //map.setTrafficEnabled(true);
     }
 
     @Subscribe
@@ -67,7 +72,7 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
                 .position(new LatLng(0, 0))
                 .title("Marker"));
         PolylineOptions godLine = event.getGodLine();
-        Polyline line = map.addPolyline(godLine);
+        Polyline line = map.addPolyline(godLine.color(Color.BLUE));
         lineList.add(line);
         optionsList.add(godLine);
     }
@@ -86,29 +91,40 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
 
     private void updateLineSelection() {
         if (selectedLine != null){
-            select(selectedLine);
-            for (PolylineOptions p : optionsList) {
-                if (!p.equals(selectedLine)) {
-                   unSelect(p);
-               }
-            }
+            select();
+            unselect();
+            Log.e("size", String.valueOf(optionsList.size()));
         }
-
     }
 
-    private void select(PolylineOptions p){
-        p.color(0x376390);
+    private void select(){
+        selectedLine.setColor(Color.RED);
+    }
+
+    private void unselect(){
+        for (Polyline l: lineList){
+            if (l!=selectedLine){
+                l.setColor(Color.GREEN);
+                l.setWidth(4);
+            }
+        }
+    }
+
+   /* private void select(Polyline p){
+        for (Polyline l: lineList)
+            l.setColor(Color.RED);
         Log.e("Hello", "Hello");
     }
 
-    private void unSelect(PolylineOptions p){
-        p.color(0x376878);
-        /*PolylineOptions updated = new PolylineOptions();
-        for (LatLng point: p.getPoints())
-            updated.add(point);
-        Polyline toAdd = map.addPolyline(updated.color(0x376878));*/
+    private void unselect(Polyline p) {
+        p.color(Color.GREEN);
+        map.addPolyline(p);
+        for (Polyline l: lineList)
+                l.setColor(Color.RED);
+        //PolylineOptions updated = new PolylineOptions().addAll(p.getPoints());
+        //Polyline toAdd = map.addPolyline(updated.color(2376878));
         //lineList.remove(p);
         //lineList.add(toAdd);
         Log.e("Bye", "Bye");
-    }
+    }*/
 }
