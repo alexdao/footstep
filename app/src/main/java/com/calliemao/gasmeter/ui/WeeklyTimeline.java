@@ -37,6 +37,12 @@ public class WeeklyTimeline extends AppCompatActivity {
         String[] labels = {"Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"};
         float[] data = {20, 14, 17, 18, 22, 8, 6};
 
+//        BarSet test = new BarSet(labels, data);  
+        for (int i = 0; i < testData.length; i++) { 
+            Bar bar = new Bar(labels[i], data[i]); 
+            if (i % 2 == 0) bar.setColor(0); else bar.setColor(-10000); }  test.setColor(-10000); 
+    }
+        barChartView.addData(test);
 
         Animation animation = new Animation(1500);
         animation.setEasing(new ElasticEase());
