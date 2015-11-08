@@ -25,6 +25,12 @@
         <item>R.drawable.ic_directions_run_black_48dp</item>
     </string-array>
 
+
+    <string name="new_path_text">
+        Distance: 54 miles\n
+        Average velocity: 35.8mph\n
+        Carbon emissions: 197.2lbs\n
+    </string>
     <!-- Activity detection strings -->
     <string name="in_vehicle">In a vehicle</string>
     <string name="on_bicycle">On a bicycle</string>

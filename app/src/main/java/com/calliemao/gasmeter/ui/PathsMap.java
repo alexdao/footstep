@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.calliemao.gasmeter.R;
 import com.calliemao.gasmeter.bus2.BusProvider;
@@ -31,11 +32,14 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
     private List<PolylineOptions> optionsList = new ArrayList<>();
     private Polyline selectedLine = null;
 
+    public TextView textview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paths_map);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        textview = (TextView) findViewById(R.id.path_text);
         setSupportActionBar(toolbar);
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
@@ -62,6 +66,7 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
                     if (PolyUtil.isLocationOnPath(lat, p.getPoints(), true, 40)) {
                         Log.e("Selected!", "Selected!");
                         selectedLine = p;
+                        textview.setText(R.string.new_path_text);
                         break;
                     }
                 }
