@@ -49,7 +49,7 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
         map.addMarker(new MarkerOptions()
                 .position(new LatLng(37.316529, -122.02534))
                 .title("Marker"));
-        map.addMarker(new MarkerOptions().position(new LatLng(37.3627921,-122.1036683)))
+        map.addMarker(new MarkerOptions().position(new LatLng(37.3627921,-122.1036683)));
         client.makeRoute("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "driving");
         client.makeRoute("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "walking");
         double[] metrics = client.findDuration("37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "driving", System.currentTimeMillis() / 1000L);
@@ -123,7 +123,7 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
         for (Polyline l: lineList){
             if (l!=selectedLine){
                 l.setColor(Color.GRAY);
-                l.setWidth(3);
+                l.setWidth(4);
             }
         }
     }
