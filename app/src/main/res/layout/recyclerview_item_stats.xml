@@ -14,14 +14,12 @@
         android:layout_alignParentTop="true"
         android:padding="@dimen/stat_pic_padding" />
 
-
     <TextView
         android:id="@+id/mainTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/stat_photo"
         android:layout_alignParentTop="true"
-        android:paddingEnd="@dimen/rv_padding"
         android:paddingTop="@dimen/rv_padding" />
 
     <TextView

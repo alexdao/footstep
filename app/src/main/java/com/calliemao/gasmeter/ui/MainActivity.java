@@ -64,16 +64,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -94,7 +90,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeData(){
         stats = new ArrayList<>();
+        String[] stats_array = getResources().getStringArray(R.array.stats_array);
+        String[] photo_array = getResources().getStringArray(R.array.photo_ID);
 
+        for(int i = 0; i<stats_array.length; i++){
+            stats.add(new StatItem(photo_array[i], stats_array[i], 5));
+        }
     }
 
     private void initializeRecyclerView(View view) {
