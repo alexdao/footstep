@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.View;
 
 import com.calliemao.gasmeter.R;
-import com.calliemao.gasmeter.clients.mapsresponse.MapsResponse;
+import com.calliemao.gasmeter.bus2.BusProvider;
+import com.calliemao.gasmeter.bus2.GoogleGodLineEvent;
+import com.calliemao.gasmeter.clients.MapsResponse;
 import com.calliemao.gasmeter.clients.mapsresponse.Polyline;
 import com.calliemao.gasmeter.clients.mapsresponse.Step;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.squareup.otto.Subscribe;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -36,17 +39,7 @@ import retrofit.http.*;
 
 public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
 
-    private static final String API_URL = "https://maps.googleapis.com/maps/api/directions/json";
-    private PolylineOptions theGodLine;
-    public interface MapsService{
-        @GET("/{method}&key=AIzaSyCjnY7m8hXu7jZv3eQw6EdZxm3Sd7uvOnY")
-        void getDirections(
-                @Path("method") String method,
-                @Query("origin") String origin,
-                @Query("destination") String destination,
-                @Query("mode") String mode,
-                Callback<MapsResponse> mapsResponseCallback);
-    }
+    GoogleMap map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,67 +61,32 @@ public class PathsMap extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     public void onMapReady(GoogleMap map){
+        this.map = map;
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        makeRoute();
-        map.addPolyline(theGodLine);
+        //MapsResponse client = MapsResponse.getInstance();
+        //client.makeRoute();
+    }
+
+    @Subscribe
+    public void handleGodLineEvent(GoogleGodLineEvent event) {
+        Log.e("Event received", "Hello");
         map.addMarker(new MarkerOptions()
                 .position(new LatLng(0, 0))
                 .title("Marker"));
+        Log.e("After first marker", "?");
+        map.addPolyline(event.getGodLine());
+        Log.e("After 2nd marker", "yay");
     }
 
-    private void makeRoute(){
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
-        MapsService service = restAdapter.create(MapsService.class);
-        service.getDirections("", "37.316529, -122.025349", "Googleplex", "driving",
-                new Callback<MapsResponse>() {
-                    @Override
-                    public void success(MapsResponse mapsResponse, Response response) {
-                        List<Step> steps = mapsResponse.getRoutes().get(0).getLegs().get(0).getSteps();
-                        for (Step s: steps){
-                            List<LatLng> points = decodePoly(s.getPolyline().getPoints());
-                            for (LatLng p : points){
-                                theGodLine.add(p);
-                            }
-                        }
-                    }
-                    public void failure(RetrofitError error) {
-                        Log.e("Connection failure: ", "Polyline", error.getCause());
-                    }
-                }
-        );
-    }
-    private List<LatLng> decodePoly(String encoded) {
-
-        List<LatLng> poly = new ArrayList<LatLng>();
-        int index = 0, len = encoded.length();
-        int lat = 0, lng = 0;
-
-        while (index < len) {
-            int b, shift = 0, result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-            lat += dlat;
-
-            shift = 0;
-            result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-            lng += dlng;
-
-            LatLng point = new LatLng((double) lat / 1E5,
-                    (double) lng / 1E5);
-            poly.add(point);
-        }
-
-        return poly;
+    @Override
+    public void onResume() {
+        super.onResume();
+        BusProvider.getInstance().register(this);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        BusProvider.getInstance().unregister(this);
+    }
 }
