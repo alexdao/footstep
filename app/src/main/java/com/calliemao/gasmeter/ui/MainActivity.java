@@ -68,9 +68,6 @@ public class MainActivity extends AppCompatActivity implements
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
-    @Bind(R.id.fab)
-    FloatingActionButton fab;
-
     @Bind(R.id.recycler_view)
     RecyclerView recyclerView;
 
@@ -130,21 +127,8 @@ public class MainActivity extends AppCompatActivity implements
         mDetectedActivitiesListView.setAdapter(mAdapter);
 
         buildGoogleApiClient();
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
-
-    /**
-     * Builds a GoogleApiClient. Uses the {@code #addApi} method to request the
-     * ActivityRecognition API.
-     */
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -545,5 +529,4 @@ public class MainActivity extends AppCompatActivity implements
             }
         }
     }
-
 }

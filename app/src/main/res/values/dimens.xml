@@ -17,7 +17,7 @@
     <dimen name="timeline_arrow_width">40dp</dimen>
     <dimen name="timeline_arrow_height">40dp</dimen>
     <!-- Font sizes -->
-    <dimen name="miles_driven">42sp</dimen>
+    <dimen name="miles_driven">60sp</dimen>
 
     <!-- Services -->
     <dimen name="wide_space">24dp</dimen>

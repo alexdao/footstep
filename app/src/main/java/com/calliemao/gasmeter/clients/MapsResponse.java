@@ -27,7 +27,7 @@ public class MapsResponse {
 
     private static final String API_URL = "https://maps.googleapis.com/maps/api/directions";
     private static final String API_KEY = "AIzaSyCjnY7m8hXu7jZv3eQw6EdZxm3Sd7uvOnY";
-    private PolylineOptions theGodLine = new PolylineOptions();
+    private PolylineOptions theGodLine;
     private static final MapsResponse restClient = new MapsResponse();
 
     private Bus eventBus;
@@ -52,10 +52,11 @@ public class MapsResponse {
                 Callback<com.calliemao.gasmeter.clients.mapsresponse.MapsResponse> mapsResponseCallback);
     }
 
-    public void makeRoute(){
+    public void makeRoute(String origin, String destination, String mode){
+        theGodLine = new PolylineOptions();
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API_URL).build();
         MapsService service = restAdapter.create(MapsService.class);
-        service.getDirections("json", "37.316529, -122.025349", "place_id:ChIJj61dQgK6j4AR4GeTYWZsKWw", "driving", API_KEY,
+        service.getDirections("json", origin, destination, mode, API_KEY,
                 new Callback<com.calliemao.gasmeter.clients.mapsresponse.MapsResponse>() {
                     @Override
                     public void success(com.calliemao.gasmeter.clients.mapsresponse.MapsResponse mapsResponse, Response response) {
