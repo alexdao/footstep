@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.JsonWriter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,10 +41,19 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.DetectedActivity;
+import com.google.android.gms.location.LocationServices;
 import com.squareup.picasso.Picasso;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -73,6 +84,11 @@ public class MainActivity extends AppCompatActivity implements
     private DetectedActivitiesAdapter mAdapter;
     protected GoogleApiClient mGoogleApiClient;
     private ArrayList<DetectedActivity> mDetectedActivities;
+
+    Location gpslocation = null;
+
+    private static final int GPS_TIME_INTERVAL = 60000; // get gps location every 1 min
+    private static final int GPS_DISTANCE= 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
     }
+
 
     /**
      * Builds a GoogleApiClient. Uses the {@code #addApi} method to request the
@@ -345,7 +362,60 @@ public class MainActivity extends AppCompatActivity implements
             ArrayList<DetectedActivity> updatedActivities =
                     intent.getParcelableArrayListExtra(Constants.ACTIVITY_EXTRA);
             updateDetectedActivitiesList(updatedActivities);
+
+            int max = 0;
+            int curAction = 0;
+            for (DetectedActivity activity: updatedActivities){
+                if (activity.getConfidence() > max){
+                    curAction = activity.getType();
+                }
+            }
+
+            if (curAction == 5){
+                // record time
+                Calendar cal = new GregorianCalendar(TimeZone.getTimeZone("EST"));
+                Date date = cal.getTime();
+
+                // record location
+                Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+                // write to JSON
+                try {
+                    writeToJSON(new FileOutputStream("test_driving.json"), date, location);
+                }
+                catch(IOException e){
+                    Log.e("exception", e.toString());
+                }
+            }
         }
+    }
+
+    private void writeToJSON(OutputStream out, Date date, Location loc) throws IOException {
+        JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
+        writer.setIndent("  ");
+        writer.beginArray();
+
+        writer.beginObject();
+        writer.name("Date").value(date.toString());
+
+        writer.name("Location");
+        writer.beginArray();
+        writer.value(loc.getLatitude());
+        writer.value(loc.getLongitude());
+        writer.endArray();
+
+        writer.endObject();
+        writer.close();
+    }
+
+
+
+    private Calendar dateToCalendar(Date date) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
+
     }
 
     @Override
