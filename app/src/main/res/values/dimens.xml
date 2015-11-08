@@ -13,4 +13,12 @@
 
     <!-- Font sizes -->
     <dimen name="miles_driven">52sp</dimen>
+
+    <!-- Services -->
+    <dimen name="wide_space">24dp</dimen>
+    <dimen name="narrow_space">8dp</dimen>
+    <dimen name="headline_text_size">24sp</dimen>
+
+    <dimen name="progress_bar_min_height">6dp</dimen>
+    <dimen name="progress_bar_top_margin">4dp</dimen>
 </resources>
