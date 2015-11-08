@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">GasMeter</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_weekly_timeline">WeeklyTimeline</string>
+    <string name="title_activity_weekly_timeline">&#xD;Miles Driven</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -100,5 +100,12 @@
         <item>gallons of gas</item>
         <item>gas saved</item>
         <item>miles walked/biked</item>
+    </string-array>
+
+    <string-array name="photo_ID">
+        <item>R.id.ic_directions_car_black_48dp</item>
+        <item>R.id.ic_local_gas_station_black_48dp</item>
+        <item>R.id.favorite_border_black_48dp</item>
+        <item>R.id.ic_directions_run_black_48dp</item>
     </string-array>
 </resources>
