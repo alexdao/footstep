@@ -23,7 +23,7 @@
             android:layout_marginRight="0dp"
             android:layout_marginTop="0dp"
             android:layout_weight=".6"
-            android:background="#00BBA7"
+            android:background="#777777"
             android:paddingBottom="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -33,11 +33,11 @@
             chart:chart_labelColor="@android:color/white">
         </com.db.chart.view.BarChartView>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@id/linechart"
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="@string/title_activity_weekly_timeline"
-            android:layout_below="@id/linechart"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>
