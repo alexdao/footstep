@@ -42,6 +42,7 @@ import com.google.android.gms.location.DetectedActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -124,10 +125,6 @@ public class MainActivity extends AppCompatActivity implements
         });
     }
 
-    /**
-     * Builds a GoogleApiClient. Uses the {@code #addApi} method to request the
-     * ActivityRecognition API.
-     */
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -331,7 +328,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void updateDetectedActivitiesList(ArrayList<DetectedActivity> detectedActivities) {
         mAdapter.updateActivities(detectedActivities);
     }
-
+    
     /**
      * Receiver for intents sent by DetectedActivitiesIntentService via a sendBroadcast().
      * Receives a list of one or more DetectedActivity objects associated with the current state of
@@ -345,6 +342,19 @@ public class MainActivity extends AppCompatActivity implements
             ArrayList<DetectedActivity> updatedActivities =
                     intent.getParcelableArrayListExtra(Constants.ACTIVITY_EXTRA);
             updateDetectedActivitiesList(updatedActivities);
+/**
+            HashMap<Integer, Integer> detectedActivitiesMap = new HashMap<>();
+            for (DetectedActivity activity : updatedActivities) {
+                detectedActivitiesMap.put(activity.getType(), activity.getConfidence());
+            }
+            ArrayList<DetectedActivity> tempList = new ArrayList<DetectedActivity>();
+            for (int i = 0; i < Constants.MONITORED_ACTIVITIES.length; i++) {
+                int confidence = detectedActivitiesMap.containsKey(Constants.MONITORED_ACTIVITIES[i]) ?
+                        detectedActivitiesMap.get(Constants.MONITORED_ACTIVITIES[i]) : 0;
+
+                tempList.add(new DetectedActivity(Constants.MONITORED_ACTIVITIES[i],
+                        confidence));
+            }*/
         }
     }
 
@@ -475,5 +485,4 @@ public class MainActivity extends AppCompatActivity implements
             }
         }
     }
-
 }
