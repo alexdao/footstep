@@ -1,5 +1,6 @@
 package com.calliemao.gasmeter.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,10 +15,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.calliemao.gasmeter.R;
+import com.db.chart.model.Bar;
 import com.db.chart.model.BarSet;
 import com.db.chart.view.BarChartView;
 import com.db.chart.view.animation.Animation;
 import com.db.chart.view.animation.easing.LinearEase;
+import com.db.chart.view.animation.easing.ElasticEase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +53,10 @@ public class WeeklyTimeline extends AppCompatActivity {
         setContentView(R.layout.activity_weekly_timeline);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+
+        initializeData();
+        initializeRecyclerView(findViewById(R.id.recycler_view));
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,18 +65,26 @@ public class WeeklyTimeline extends AppCompatActivity {
             }
         });
 
-        /*Bar bar1 = new Bar("Friday", 5);
-        Bar bar2 = new Bar("Saturday", 5);
-        Bar bar3 = new Bar("Sunday", 5);*/
+
         String[] testLabels = {"Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"};
-        float[] testData = {20, 14, 17, 18, 22, 8, 6};
-        BarSet test = new BarSet(testLabels, testData);
+        float[] testData = {19, 14, 17, 18, 19, 8, 6};
+        BarSet test = new BarSet();
         test.setColor(-10);
         barChartView.addData(test);
 
-        Animation animation = new Animation(1000);
-        //animation.setAlpha(0.5);
-        animation.setEasing(new LinearEase()); //ElasticEase
+        for (int i = 0; i < testLabels.length; i++){
+            Bar bar = new Bar(testLabels[i], testData[i]);
+
+            if (i % 2 == 0)
+                bar.setColor(Color.parseColor("#DDDDDD"));
+            else
+                bar.setColor(-5);
+            test.addBar(bar);
+        }
+
+        Animation animation = new Animation(1500);
+        animation.setEasing(new ElasticEase());
+
 
 //        barChartView.setAxisBorderValues(0, 100, 5);
         barChartView.show(animation);
@@ -78,6 +93,13 @@ public class WeeklyTimeline extends AppCompatActivity {
 
     private void initializeData(){
         items = new ArrayList<>();
+        items.add(new TimelineItem("callie", "alex"));
+        items.add(new TimelineItem("callie", "alex"));
+        items.add(new TimelineItem("callie", "alex"));
+        items.add(new TimelineItem("callie", "alex"));
+        items.add(new TimelineItem("callie", "alex"));
+
+
     }
 
     private void initializeRecyclerView(View view) {
@@ -108,7 +130,7 @@ public class WeeklyTimeline extends AppCompatActivity {
 
         @Override
         public TimelineViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_stats, viewGroup, false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recyclerview_item_timeline, viewGroup, false);
             TimelineViewHolder pvh = new TimelineViewHolder(v, new TimelineViewHolder.ISunlightDataViewHolderClicks() {
                 public void onClickItem(View caller) {
                 }

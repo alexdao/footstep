@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">GasMeter</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_weekly_timeline">WeeklyTimeline</string>
+    <string name="title_activity_weekly_timeline">&#xD;Miles Driven</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
